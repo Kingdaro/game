@@ -1,31 +1,21 @@
 io.stdout:setvbuf('no')
 
-local field = require 'field'
-local player = require 'player'
-local input = require 'input'
+local gameplay = require 'gameplay'
 local util = require 'util'
 
 function love.load()
   love.graphics.setBackgroundColor(util.toLoveColor(0.08, 0.02, 0.08))
-
-  field:init(3)
-  player:init()
+  gameplay:init()
 end
 
 function love.update(dt)
-  player:update(dt)
-  field:update(dt)
+  gameplay:update(dt)
 end
 
 function love.keypressed(key)
-  if key == 'escape' then
-    love.event.quit()
-  else
-    input:keypressed(key)
-  end
+  gameplay:keypressed(key)
 end
 
 function love.draw()
-  field:drawMines()
-  player:draw()
+  gameplay:draw()
 end
