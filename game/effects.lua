@@ -11,9 +11,8 @@ function effects:init(clock, music)
     music:play()
     wait(0.1)
     while true do
-      self.shake.x = 20
-      wait(60 / 130)
-      self.shake.y = 20
+      self.shake.x = 15
+      self.shake.y = 15
       wait(60 / 130)
     end
   end)
@@ -30,7 +29,6 @@ function effects:transform(draw)
 
   love.graphics.push()
   love.graphics.translate(sx, sy)
-
   draw()
   love.graphics.pop()
 end
