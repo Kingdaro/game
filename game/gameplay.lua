@@ -23,6 +23,7 @@ function gameplay:keypressed(key)
 end
 
 function gameplay:draw()
+  field:drawBackground()
   field:drawMines()
   player:draw()
 end

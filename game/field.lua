@@ -1,5 +1,6 @@
-local mine = require 'mine'
-local clock = require 'clock'
+local mine = require "mine"
+local clock = require "clock"
+local util = require "util"
 
 local field = {}
 
@@ -40,6 +41,15 @@ function field:drawMines()
   for _, m in ipairs(self.mines) do
     m:draw()
   end
+end
+
+function field:drawBackground()
+  local screenWidth, screenHeight = love.graphics.getDimensions()
+  local spacing = 30
+  local width = screenWidth - spacing * 2
+  local height = screenHeight - spacing * 2
+  love.graphics.setColor(util.toLoveColor(0, 0, 0, 0.2))
+  love.graphics.rectangle('fill', spacing, spacing, width, height)
 end
 
 function field:getLanePosition(lane)
