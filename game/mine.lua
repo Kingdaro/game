@@ -7,12 +7,10 @@ local outerSize = 12
 local outerDistance = 40
 local outerCount = 3
 
-function mine.new(x, y)
-  local self = setmetatable({}, { __index = mine })
+function mine:init(x, y)
   self.x = x
   self.y = y
   self.time = 0
-  return self
 end
 
 function mine:update(dt)
@@ -46,6 +44,12 @@ function mine:draw()
   love.graphics.rectangle('fill', -innerSize / 2, -innerSize / 2, innerSize, innerSize)
 
   love.graphics.pop()
+end
+
+function mine.new(...)
+  local self = setmetatable({}, { __index = mine })
+  mine.init(self, ...)
+  return self
 end
 
 return mine
