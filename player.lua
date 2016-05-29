@@ -1,6 +1,6 @@
-local player = {}
-
 local field = require 'field'
+
+local player = {}
 
 function player:init()
   self.x = 300

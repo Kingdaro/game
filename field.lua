@@ -1,6 +1,6 @@
-local field = {}
-
 local mine = require 'mine'
+
+local field = {}
 
 function field:init(laneCount)
   self.laneCount = laneCount

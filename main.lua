@@ -3,7 +3,7 @@ local player = require 'player'
 
 function love.load()
   field:init(3)
-  player:init(field)
+  player:init()
 end
 
 function love.update(dt)
