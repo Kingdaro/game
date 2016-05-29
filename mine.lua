@@ -1,3 +1,5 @@
+local util = require 'util'
+
 local mine = {}
 local size = 40
 
@@ -13,6 +15,7 @@ function mine:update(dt)
 end
 
 function mine:draw()
+  love.graphics.setColor(util.toLoveColor(0.8, 0.3, 0.3))
   love.graphics.push()
   love.graphics.translate(self.x, self.y)
   love.graphics.rotate(math.rad(self.y))

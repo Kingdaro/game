@@ -1,8 +1,11 @@
 local field = require 'field'
 local player = require 'player'
 local input = require 'input'
+local util = require 'util'
 
 function love.load()
+  love.graphics.setBackgroundColor(util.toLoveColor(0.08, 0.02, 0.08))
+
   field:init(3)
   player:init()
 end
