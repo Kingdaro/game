@@ -48,7 +48,7 @@ function field:drawBackground()
   local spacing = 30
   local width = screenWidth - spacing * 2
   local height = screenHeight - spacing * 2
-  love.graphics.setColor(util.toLoveColor(0, 0, 0, 0.2))
+  love.graphics.setColor(util.toLoveColor(1, 1, 1, 0.02))
   love.graphics.rectangle('fill', spacing, spacing, width, height)
 end
 
