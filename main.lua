@@ -3,7 +3,7 @@ local player = require 'player'
 
 function love.load()
   field:init(3)
-  player:init(field.laneCount)
+  player:init(field)
 end
 
 function love.update(dt)
@@ -12,7 +12,11 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-  player:keypressed(key)
+  if key == 'escape' then
+    love.event.quit()
+  else
+    player:keypressed(key)
+  end
 end
 
 function love.draw()
