@@ -10,22 +10,20 @@ local outerCount = 3
 function mine:init(x, y)
   self.x = x
   self.y = y
-  self.time = 0
 end
 
 function mine:update(dt)
   self.y = self.y + 500 * dt
-  self.time = self.time + dt
 end
 
-function mine:draw()
-  local glow = (math.sin(self.time * 10) / 2 + 0.5) * 0.4
+function mine:draw(time)
+  local glow = (math.sin(time * 10) / 2 + 0.5) * 0.4
 
   love.graphics.push('all')
 
   love.graphics.setColor(util.brighten(glow, 0.8, 0.3, 0.3))
   love.graphics.translate(self.x, self.y)
-  
+
 
   for i = 1, outerCount do
     love.graphics.push()

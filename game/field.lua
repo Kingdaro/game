@@ -39,7 +39,7 @@ end
 
 function field:drawMines()
   for _, m in ipairs(self.mines) do
-    m:draw()
+    m:draw(self.clock.time)
   end
 end
 
