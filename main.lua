@@ -1,11 +1,4 @@
-
-local player = {
-  lane = 1,
-  x = 300,
-  y = 500,
-  width = 80,
-  height = 80,
-}
+local player = require 'player'
 
 local lanes = {}
 for i=1, 3 do
@@ -16,10 +9,11 @@ local mineTimer = 0
 local mineTimerLimit = 0.5
 
 function love.load()
+  player:init(#lanes)
 end
 
 function love.update(dt)
-  player.x = player.x + (player.lane * 100 - player.x) * math.min(dt, 1) * 20
+  player:update(dt)
 
   for _, lane in ipairs(lanes) do
     for i = #lane, 1, -1 do
@@ -44,19 +38,11 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-  if key == 'left' then
-    player.lane = player.lane > 1 and player.lane - 1 or #lanes
-  elseif key == 'right' then
-    player.lane = player.lane < #lanes and player.lane + 1 or 1
-  end
+  player:keypressed(key)
 end
 
 function love.draw()
-  love.graphics.rectangle('fill',
-    player.x - player.width / 2,
-    player.y - player.height / 2,
-    player.width, player.height
-  )
+  player:draw()
 
   for i, lane in ipairs(lanes) do
     for _, mine in ipairs(lane) do
