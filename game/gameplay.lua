@@ -5,6 +5,9 @@ local input = require 'input'
 local gameplay = {}
 
 function gameplay:init()
+  self.music = love.audio.newSource('fragments of darkness.mp3')
+  self.music:play()
+
   field:init(3)
   player:init()
 end
