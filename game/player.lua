@@ -4,11 +4,11 @@ local util = require 'util'
 local player = {}
 
 function player:init(clock)
-  self.x = 300
+  self.lane = math.ceil(field.laneCount / 2)
+  self.x = field:getLanePosition(self.lane)
   self.y = 700
   self.size = 70
   self.rotation = 0
-  self.lane = 1
   self.clock = clock
 end
 
