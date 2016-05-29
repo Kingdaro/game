@@ -27,22 +27,22 @@ end
 
 function field:updateMines(dt)
   for i=#self.mines, 1, -1 do
-    local mine = self.mines[i]
-    mine:update(dt)
-    if mine.y > love.graphics.getHeight() + 100 then
+    local v = self.mines[i]
+    v:update(dt)
+    if v.y > love.graphics.getHeight() + 100 then
       table.remove(self.mines, i)
     end
   end
 end
 
-function field:getLanePosition(lane)
-  return love.graphics.getWidth() / (self.laneCount + 1) * lane
+function field:drawMines()
+  for _, v in ipairs(self.mines) do
+    v:draw()
+  end
 end
 
-function field:draw()
-  for _, mine in ipairs(self.mines) do
-    mine:draw()
-  end
+function field:getLanePosition(lane)
+  return love.graphics.getWidth() / (self.laneCount + 1) * lane
 end
 
 return field

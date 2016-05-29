@@ -24,6 +24,6 @@ function love.keypressed(key)
 end
 
 function love.draw()
+  field:drawMines()
   player:draw()
-  field:draw()
 end
