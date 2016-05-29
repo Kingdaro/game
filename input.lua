@@ -2,12 +2,19 @@ local player = require 'player'
 
 local input = {}
 
+local actions = {
+  moveLeft = function() player:move(-1) end,
+  moveRight = function() player:move(1) end,
+}
+
+local keys = {
+  left = actions.moveLeft,
+  right = actions.moveRight,
+}
+
 function input:keypressed(key)
-  if key == 'right' then
-    player:move(1)
-  elseif key == 'left' then
-    player:move(-1)
-  end
+  local action = keys[key]
+  if action then action() end
 end
 
 return input
