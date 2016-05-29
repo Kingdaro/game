@@ -5,18 +5,6 @@ local player = require 'player'
 local input = require 'input'
 local util = require 'util'
 
-local clock = require 'clock'
-
-local test = clock.new()
-
-test:schedule(function(wait)
-  for i=10, 1, -1 do
-    print('Counting down, ', i)
-    wait(0.8)
-  end
-  print('Blast off!')
-end)
-
 function love.load()
   love.graphics.setBackgroundColor(util.toLoveColor(0.08, 0.02, 0.08))
 
@@ -25,8 +13,6 @@ function love.load()
 end
 
 function love.update(dt)
-  test:update(dt)
-
   player:update(dt)
   field:update(dt)
 end

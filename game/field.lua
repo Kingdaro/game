@@ -1,23 +1,24 @@
 local mine = require 'mine'
+local clock = require 'clock'
 
 local field = {}
 
 function field:init(laneCount)
   self.laneCount = laneCount
-
   self.mines = {}
-  self.mineTimer = 0
-  self.mineTimerLimit = 0.4
+  self.clock = clock.new()
+
+  self.clock:schedule(function(wait)
+    while true do
+      self:addMine()
+      wait(0.4)
+    end
+  end)
 end
 
 function field:update(dt)
+  self.clock:update(dt)
   self:updateMines(dt)
-
-  self.mineTimer = self.mineTimer + dt
-  while self.mineTimer >= self.mineTimerLimit do
-    self.mineTimer = self.mineTimer - self.mineTimerLimit
-    self:addMine()
-  end
 end
 
 function field:addMine()
