@@ -29,17 +29,11 @@ function mine:draw(time)
     love.graphics.push()
     love.graphics.rotate(math.rad(i * (360 / outerCount) - self.y / 4))
     love.graphics.translate(outerDistance, 0)
-
-    love.graphics.push()
-    love.graphics.rotate(-math.rad(self.y / 2))
-    util.rectangle(0, 0, outerSize)
-    love.graphics.pop()
-
+    util.rectangle(0, 0, outerSize, nil, -math.rad(self.y / 2))
     love.graphics.pop()
   end
 
-  love.graphics.rotate(math.rad(self.y / 2))
-  util.rectangle(0, 0, innerSize)
+  util.rectangle(0, 0, innerSize, nil, math.rad(self.y / 2))
 
   love.graphics.pop()
 end
