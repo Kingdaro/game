@@ -1,15 +1,18 @@
-local field = require 'field'
-local player = require 'player'
-local input = require 'input'
+local field = require "field"
+local player = require "player"
+local input = require "input"
+local clock = require "clock"
 
 local gameplay = {}
 
 function gameplay:init()
   self.music = love.audio.newSource('fragments of darkness.mp3')
-  self.music:play()
+  -- self.music:play()
 
-  field:init(3)
-  player:init()
+  self.clock = clock.new()
+
+  field:init(3, self.clock)
+  player:init(self.clock)
 end
 
 function gameplay:update(dt)

@@ -1,13 +1,12 @@
 local mine = require "mine"
-local clock = require "clock"
 local util = require "util"
 
 local field = {}
 
-function field:init(laneCount)
+function field:init(laneCount, clock)
   self.laneCount = laneCount
   self.mines = {}
-  self.clock = clock.new()
+  self.clock = clock
 
   self.clock:schedule(function(wait)
     while true do

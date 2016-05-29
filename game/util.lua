@@ -34,10 +34,16 @@ function util.clamp(n, low, high)
   return n < low and low or n > high and high or n
 end
 
-function util.rectangle(x, y, width, height, mode)
+function util.rectangle(x, y, width, height, rotation, mode)
   height = height or width
   mode = mode or 'fill'
-  love.graphics.rectangle(mode, x - width / 2, y - height / 2, width, height)
+  love.graphics.push()
+  love.graphics.translate(x, y)
+  if rotation and rotation ~= 0 then
+    love.graphics.rotate(rotation)
+  end
+  love.graphics.rectangle(mode, -width / 2, -height / 2, width, height)
+  love.graphics.pop()
 end
 
 return util
