@@ -6,6 +6,7 @@ local util = require 'util'
 function love.load()
   love.graphics.setBackgroundColor(util.toLoveColor(0.08, 0.02, 0.08))
   gameplay:init()
+  gameplay:loadLevel('Fragments of Darkness')
 end
 
 function love.update(dt)
