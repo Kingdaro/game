@@ -14,12 +14,8 @@ function player:update(dt)
   self.x = self.x + (field:getLanePosition(self.lane) - self.x) * math.min(dt, 1) * 20
 end
 
-function player:keypressed(key)
-  if key == 'left' then
-    self.lane = self.lane > 1 and self.lane - 1 or field.laneCount
-  elseif key == 'right' then
-    self.lane = self.lane < field.laneCount and self.lane + 1 or 1
-  end
+function player:move(dir)
+  self.lane = (self.lane + dir - 1) % field.laneCount + 1
 end
 
 function player:draw()

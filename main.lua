@@ -1,5 +1,6 @@
 local field = require 'field'
 local player = require 'player'
+local input = require 'input'
 
 function love.load()
   field:init(3)
@@ -15,7 +16,7 @@ function love.keypressed(key)
   if key == 'escape' then
     love.event.quit()
   else
-    player:keypressed(key)
+    input:keypressed(key)
   end
 end
 
