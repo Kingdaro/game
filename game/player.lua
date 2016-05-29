@@ -16,7 +16,7 @@ function player:update(dt)
 end
 
 function player:move(dir)
-  self.lane = (self.lane + dir - 1) % field.laneCount + 1
+  self.lane = math.min(math.max(self.lane + dir, 1), 3)
 end
 
 function player:draw()
