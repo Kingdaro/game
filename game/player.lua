@@ -12,11 +12,11 @@ function player:init()
 end
 
 function player:update(dt)
-  self.x = self.x + (field:getLanePosition(self.lane) - self.x) * math.min(dt * 20, 1)
+  self.x = util.interpolate(self.x, field:getLanePosition(self.lane), dt * 20)
 end
 
 function player:move(dir)
-  self.lane = math.min(math.max(self.lane + dir, 1), 3)
+  self.lane = util.clamp(self.lane + dir, 1, field.laneCount)
 end
 
 function player:draw()

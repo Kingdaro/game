@@ -26,4 +26,12 @@ function util.brighten(amount, r, g, b, a)
   return util.toLoveColor(r, g, b, a)
 end
 
+function util.interpolate(low, high, delta)
+  return low + (high - low) * util.clamp(delta, 0, 1)
+end
+
+function util.clamp(n, low, high)
+  return n < low and low or n > high and high or n
+end
+
 return util
