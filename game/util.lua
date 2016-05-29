@@ -34,4 +34,10 @@ function util.clamp(n, low, high)
   return n < low and low or n > high and high or n
 end
 
+function util.rectangle(x, y, width, height, mode)
+  height = height or width
+  mode = mode or 'fill'
+  love.graphics.rectangle(mode, x - width / 2, y - height / 2, width, height)
+end
+
 return util

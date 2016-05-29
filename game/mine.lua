@@ -34,14 +34,14 @@ function mine:draw()
 
     love.graphics.push()
     love.graphics.rotate(-math.rad(self.y / 2))
-    love.graphics.rectangle('fill', -outerSize / 2, -outerSize / 2, outerSize, outerSize)
+    util.rectangle(0, 0, outerSize)
     love.graphics.pop()
 
     love.graphics.pop()
   end
 
   love.graphics.rotate(math.rad(self.y / 2))
-  love.graphics.rectangle('fill', -innerSize / 2, -innerSize / 2, innerSize, innerSize)
+  util.rectangle(0, 0, innerSize)
 
   love.graphics.pop()
 end
