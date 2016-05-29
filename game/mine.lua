@@ -25,7 +25,7 @@ function mine:draw()
 
   love.graphics.setColor(util.brighten(glow, 0.8, 0.3, 0.3))
   love.graphics.translate(self.x, self.y)
-
+  
 
   for i = 1, outerCount do
     love.graphics.push()

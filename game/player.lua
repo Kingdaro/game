@@ -6,8 +6,7 @@ local player = {}
 function player:init()
   self.x = 300
   self.y = 700
-  self.width = 80
-  self.height = 80
+  self.size = 70
   self.lane = 1
 end
 
@@ -21,7 +20,7 @@ end
 
 function player:draw()
   love.graphics.setColor(util.toLoveColor(0.5, 0.2, 0.5))
-  util.rectangle(self.x, self.y, self.width, self.height)
+  util.rectangle(self.x, self.y, self.size)
 end
 
 return player
