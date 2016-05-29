@@ -11,17 +11,21 @@ function mine.new(x, y)
   local self = setmetatable({}, { __index = mine })
   self.x = x
   self.y = y
+  self.time = 0
   return self
 end
 
 function mine:update(dt)
   self.y = self.y + 500 * dt
+  self.time = self.time + dt
 end
 
 function mine:draw()
+  local glow = (math.sin(self.time * 10) / 2 + 0.5) * 0.4
+
   love.graphics.push('all')
 
-  love.graphics.setColor(util.toLoveColor(0.8, 0.3, 0.3))
+  love.graphics.setColor(util.brighten(glow, 0.8, 0.3, 0.3))
   love.graphics.translate(self.x, self.y)
 
 

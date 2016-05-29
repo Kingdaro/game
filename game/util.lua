@@ -16,4 +16,14 @@ else
   function util.fromLoveColor(...) return ... end
 end
 
+function util.brighten(amount, r, g, b, a)
+  if type(r) == 'table' then
+    r, g, b, a = unpack(r)
+  end
+  r = r + (1 - r) * amount
+  g = g + (1 - g) * amount
+  b = b + (1 - b) * amount
+  return util.toLoveColor(r, g, b, a)
+end
+
 return util

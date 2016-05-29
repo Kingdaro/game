@@ -27,17 +27,17 @@ end
 
 function field:updateMines(dt)
   for i=#self.mines, 1, -1 do
-    local v = self.mines[i]
-    v:update(dt)
-    if v.y > love.graphics.getHeight() + 100 then
+    local m = self.mines[i]
+    m:update(dt)
+    if m.y > love.graphics.getHeight() + 100 then
       table.remove(self.mines, i)
     end
   end
 end
 
 function field:drawMines()
-  for _, v in ipairs(self.mines) do
-    v:draw()
+  for _, m in ipairs(self.mines) do
+    m:draw()
   end
 end
 
