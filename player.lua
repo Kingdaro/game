@@ -11,7 +11,7 @@ function player:init()
 end
 
 function player:update(dt)
-  self.x = self.x + (self.lane * 100 - self.x) * math.min(dt, 1) * 20
+  self.x = self.x + (field:getLanePosition(self.lane) - self.x) * math.min(dt, 1) * 20
 end
 
 function player:keypressed(key)

@@ -22,7 +22,7 @@ end
 
 function field:addMine()
   local lane = math.random(self.laneCount)
-  table.insert(self.mines, mine.new(lane * 100, -100))
+  table.insert(self.mines, mine.new(self:getLanePosition(lane), -100))
 end
 
 function field:updateMines(dt)
@@ -33,6 +33,10 @@ function field:updateMines(dt)
       table.remove(self.mines, i)
     end
   end
+end
+
+function field:getLanePosition(lane)
+  return love.graphics.getWidth() / (self.laneCount + 1) * lane
 end
 
 function field:draw()
