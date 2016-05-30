@@ -11,7 +11,7 @@ function effects:init(clock)
 
   self.shake = { x = 0, y = 0 }
   self.flash = 0
-  self.swirl = { enabled = false, angle = 0, magnitude = 15 }
+  self.swirl = { enabled = false, angle = 0, magnitude = 15, speed = 360 }
 end
 
 function effects:start()
@@ -33,8 +33,29 @@ function effects:start()
   end)
 end
 
+function effects:update(dt)
+  if not self.playing then return end
+  self.time = self.time + dt
+
+  self.swirl.enabled = self:checkBeatRange(self.time, 0, 1)
+    or self:checkBeatRange(self.time, 16, 17)
+    or self:checkBeatRange(self.time, 32, 33)
+    or self:checkBeatRange(self.time, 48, 50)
+
+  if self:checkBeatRange(self.time, 49, 50) then
+    self.swirl.speed = -360
+  end
+
+  self.flux:update(dt)
+  self.swirl.angle = self.swirl.angle + dt * self.swirl.speed + 180
+end
+
 function effects:beats(beats)
   return (60 / 130) * beats
+end
+
+function effects:checkBeatRange(time, low, high)
+  return self:beats(low) < time and time < self:beats(high)
 end
 
 function effects:triggerFlash()
@@ -45,22 +66,6 @@ end
 function effects:triggerShake()
   self.shake = { x = 1, y = 1 }
   self.flux:to(self.shake, 0.3, { x = 0, y = 0 })
-end
-
-function effects:update(dt)
-  if not self.playing then return end
-  self.time = self.time + dt
-
-  if self:beats(0) <= self.time and self.time < self:beats(1)
-  or self:beats(16) <= self.time and self.time < self:beats(17)
-  then
-    self.swirl.enabled = true
-  else
-    self.swirl.enabled = false
-  end
-
-  self.flux:update(dt)
-  self.swirl.angle = self.swirl.angle + dt * 360 + 180
 end
 
 function effects:transform(draw)
