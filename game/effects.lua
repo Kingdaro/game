@@ -9,6 +9,7 @@ function effects:init(clock)
 
   self.shake = { x = 0, y = 0 }
   self.flash = 0
+  self.swirl = { enabled = true, angle = 0, magnitude = 10 }
 end
 
 function effects:start()
@@ -44,6 +45,7 @@ end
 
 function effects:update(dt)
   self.flux:update(dt)
+  self.swirl.angle = self.swirl.angle + dt * 250 + 180
 end
 
 function effects:transform(draw)
@@ -52,6 +54,13 @@ function effects:transform(draw)
 
   love.graphics.push()
   love.graphics.translate(sx, sy)
+
+  if self.swirl.enabled then
+    love.graphics.translate(
+      math.cos(math.rad(self.swirl.angle)) * self.swirl.magnitude,
+      math.sin(math.rad(self.swirl.angle)) * self.swirl.magnitude
+    )
+  end
   draw()
   love.graphics.pop()
 end
