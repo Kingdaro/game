@@ -6,13 +6,17 @@ local effects = {}
 function effects:init(clock)
   self.flux = flux.group()
   self.clock = clock
+  self.time = 0
+  self.playing = false
 
   self.shake = { x = 0, y = 0 }
   self.flash = 0
-  self.swirl = { enabled = true, angle = 0, magnitude = 10 }
+  self.swirl = { enabled = false, angle = 0, magnitude = 15 }
 end
 
 function effects:start()
+  self.playing = true
+
   self.clock:schedule(function(wait)
     while true do
       self:triggerShake()
@@ -44,8 +48,19 @@ function effects:triggerShake()
 end
 
 function effects:update(dt)
+  if not self.playing then return end
+  self.time = self.time + dt
+
+  if self:beats(0) <= self.time and self.time < self:beats(1)
+  or self:beats(16) <= self.time and self.time < self:beats(17)
+  then
+    self.swirl.enabled = true
+  else
+    self.swirl.enabled = false
+  end
+
   self.flux:update(dt)
-  self.swirl.angle = self.swirl.angle + dt * 250 + 180
+  self.swirl.angle = self.swirl.angle + dt * 360 + 180
 end
 
 function effects:transform(draw)
