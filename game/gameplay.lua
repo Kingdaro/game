@@ -26,7 +26,12 @@ function gameplay:loadLevel(levelFolder)
   })()
 
   local music = love.audio.newSource(folderPath .. '/' .. musicFile)
-  music:play()
+  self.clock:schedule(function(wait)
+    wait(2)
+    music:play()
+    wait(0.05)
+    effects:start()
+  end)
 end
 
 function gameplay:update(dt)
@@ -49,6 +54,7 @@ function gameplay:draw()
     field:drawMines()
     player:draw()
   end)
+  effects:drawFlash()
 end
 
 return gameplay

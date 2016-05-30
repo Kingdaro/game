@@ -1,12 +1,33 @@
 local flux = require "lib.flux"
+local util = require "util"
 
 local effects = {}
 
 function effects:init(clock)
   self.shake = { x = 0, y = 0 }
-  self.flash = 1
+  self.flash = 0
   self.flux = flux.group()
   self.clock = clock
+  self.playing = false
+end
+
+function effects:start()
+  self.clock:schedule(function(wait)
+    while true do
+      self.shake = { x = 1, y = 1 }
+      self.flux:to(self.shake, 0.3, { x = 0, y = 0 })
+      wait(60 / 130)
+    end
+  end)
+
+  self.clock:schedule(function(wait)
+    wait(60 / 130)
+    while true do
+      self.flash = 1
+      self.flux:to(self, 0.3, { flash = 0 })
+      wait(60 / 130 * 2)
+    end
+  end)
 end
 
 function effects:update(dt)
@@ -21,6 +42,11 @@ function effects:transform(draw)
   love.graphics.translate(sx, sy)
   draw()
   love.graphics.pop()
+end
+
+function effects:drawFlash()
+  love.graphics.setColor(util.toLoveColor(1, 1, 1, self.flash * 0.1))
+  love.graphics.rectangle('fill', 0, 0, love.graphics.getDimensions())
 end
 
 return effects
