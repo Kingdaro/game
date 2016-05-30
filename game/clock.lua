@@ -24,7 +24,7 @@ end
 function clock:schedule(func)
   local task = { routine = coroutine.create(func), delay = 0 }
   local function wait(delay)
-    task.delay = task.delay + delay
+    task.delay = task.delay + (delay or 0)
     coroutine.yield(task.routine)
   end
   assert(coroutine.resume(task.routine, wait))
