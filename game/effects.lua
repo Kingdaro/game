@@ -16,18 +16,22 @@ function effects:start()
     while true do
       self.shake = { x = 1, y = 1 }
       self.flux:to(self.shake, 0.3, { x = 0, y = 0 })
-      wait(60 / 130)
+      wait(self:beats(1))
     end
   end)
 
   self.clock:schedule(function(wait)
-    wait(60 / 130)
+    wait(self:beats(1))
     while true do
       self.flash = 1
       self.flux:to(self, 0.3, { flash = 0 })
-      wait(60 / 130 * 2)
+      wait(self:beats(2))
     end
   end)
+end
+
+function effects:beats(beats)
+  return (60 / 130) * beats
 end
 
 function effects:update(dt)
